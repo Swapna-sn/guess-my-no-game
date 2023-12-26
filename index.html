@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <!-- first part -->
+    <header>
+        <div>
+            <button class="again">Again!</button>
+            <p>(Between 1 and 20)</p>
+        </div>
+        <h1>Guess My Number!</h1>
+        <div class="number">?</div>
+    </header>
+    <!-- Second part -->
+    <main>
+        <section class="left">
+            <input type="number" name="guess" class="guess" id="guess">
+            <button class="checkbtn" id="ckeckbtn">Check!</button>
+        </section>
+        <section class="right">
+            <p class="message">Start Guessing...</p>
+            <p class="ls">Score: <span id="score">20</span></p>
+            <p class="hs">High Score: <span id="highscore">0</span></p>
+           
+        </section>
+</main>
+</body>
+<!-- Adding Javascript -->
+<script>
+    // Adding secreat number
+let secretnumber=Math.trunc(Math.random()*20+1);
+console.log(secretnumber);
+let score=20;
+let highscore=0;
+           // Adding clickfunctionalitiy to Checkbutton
+       document.getElementById("ckeckbtn").addEventListener('click',()=>{
+        const gussedno=Number(document.getElementById('guess').value);
+
+        if(gussedno==""){
+            document.querySelector('.message').textContent="No Number"
+        }
+       
+      else if(gussedno===secretnumber){
+        document.querySelector(".message").textContent="Correct Number";
+        document.querySelector(".number").textContent=secretnumber;
+        document.querySelector("body").style.backgroundColor="lightGreen";
+
+        if(score>highscore){
+            highscore=score;
+            document.getElementById("highscore").textContent=highscore;
+        }
+      }
+      else if(gussedno>secretnumber){
+       if(score>1){
+        document.querySelector(".message").textContent="Too High";
+        score=score-1;
+        document.getElementById('score').textContent=score;
+       }else{
+        document.querySelector(".message").textContent="You Lost The Game!";
+        document.getElementById('score').textContent=0;
+       }
+      }
+
+      else if(gussedno<secretnumber){
+        if(score>1){
+            document.querySelector(".message").textContent="Too Low";
+        score=score-1;
+        document.getElementById('score').textContent=score;
+        }else{
+        document.querySelector(".message").textContent="You Lost The Game!";
+        document.getElementById('score').textContent=0;
+       
+       }
+      }
+       })
+
+
+
+// Again functions
+const displayMessage = function(message){
+    document.querySelector(".message").textContent=message;
+}
+        //Adding Click functionality to Againbutton  
+document.querySelector('.again').addEventListener('click',()=> {
+    document.querySelector("body").style.backgroundColor="Black";
+   document.getElementById("guess").value=null;
+    score=20;
+   
+    document.getElementById('score').textContent=score;
+    secretnumber=Math.trunc(Math.random()*20+1);
+    console.log(secretnumber);
+    document.querySelector(".number").textContent="?";
+    const gussedno=Number(document.getElementById('guess').value);
+
+
+    if(gussedno==""){
+            document.querySelector('.message').textContent="No Number"
+        }
+       
+      else if(gussedno===secretnumber){
+        document.querySelector(".message").textContent="Correct Number";
+        document.querySelector(".number").textContent=secretnumber;
+        document.querySelector("body").style.backgroundColor="lightGreen";
+
+        if(score>highscore){
+            highscore=score;
+            document.getElementById("highscore").textContent=highscore;
+        }
+      }
+      else if(gussedno>secretnumber){
+       if(score>1){
+        document.querySelector(".message").textContent="Too High";
+        score=score-1;
+        document.getElementById('score').textContent=score;
+       }else{
+        document.querySelector(".message").textContent="You Lost The Game!";
+        document.getElementById('score').textContent=0;
+       }
+      }
+
+      else if(gussedno<secretnumber){
+        if(score>1){
+            document.querySelector(".message").textContent="Too Low";
+        score=score-1;
+        document.getElementById('score').textContent=score;
+        }else{
+        document.querySelector(".message").textContent="You Lost The Game!";
+        document.getElementById('score').textContent=0;
+       
+       }
+      }
+})
+</script>
+</html>
